@@ -1,16 +1,27 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Consultar Clientes")
+# --- Configuração da Página ---
+st.set_page_config(
+    page_title="Consulta de Clientes",
+    page_icon="🔎",
+    layout="wide"
+)
+
+st.title("🔎 Consulta de Clientes")
 st.divider()
 
-@st.cache_data
-def carregar_dados():
+# --- Lógica para ler e exibir os clientes ---
+try:
+    # Tenta ler o arquivo CSV. Adicionamos nomes para as colunas.
+    df_clientes = pd.read_csv("clientes.csv", header=None, names=["Nome", "Data de Nascimento", "Tipo"])
+    st.write("Abaixo está a lista de clientes cadastrados:")
+    st.dataframe(df_clientes, use_container_width=True)
 
-    df = pd.read_csv("clientes.csv")
-    return df
+except FileNotFoundError:
+    # Se o arquivo não for encontrado, mostra um aviso amigável.
+    st.warning("Nenhum cliente cadastrado ainda. Cadastre um cliente na página principal para vê-lo aqui.")
 
-
-df_clientes = carregar_dados()
-if not df_clientes.empty:
-    st.dataframe(df_clientes, hide_index=True)
+except Exception as e:
+    # Se ocorrer qualquer outro erro, informa o usuário.
+    st.error(f"Ocorreu um erro inesperado ao tentar ler os dados: {e}")
