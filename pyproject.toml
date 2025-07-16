@@ -1,18 +1,16 @@
-[project]
-name = "projeto_pratico_dominando_a_linguagem_python"
+[tool.poetry]
+name = "projeto-pratico-dominando-a-linguagem-python"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Mateus Benvenuti",email = "mateusjbenvenuti@gmail.com"}
-]
+authors = ["Mateus Benvenuti <mateusjbenvenuti@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "streamlit (>=1.46.1,<2.0.0)",
-    "pandas (>=2.3.1,<3.0.0)"
-]
+package-mode = false  # <== ADICIONE ESTA LINHA
 
+[tool.poetry.dependencies]
+python = ">=3.12"
+streamlit = ">=1.46.1,<2.0.0"
+pandas = ">=2.3.1,<3.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
